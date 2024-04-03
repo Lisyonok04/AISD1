@@ -5,10 +5,20 @@
 
 using namespace std;
 
-TEST(test_SET, test) {
+TEST(insert, test) {
     Tree<int> set;
     set.insert(41);
     set.insert(90);
     set.insert(20);
+    set.print();
+}
+
+TEST(clear, test) {
+    Tree<int> set;
+    set.insert(41);
+    set.insert(90);
+    set.insert(20);
+    set.print();
+    set.eraser(41);
     set.print();
 }
