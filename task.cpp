@@ -48,6 +48,39 @@ private:
 		}
 		return false;
 	}
+
+	bool erase(Node<T>*& node, T value) {
+		if (!node) {
+			return false;
+		}
+		if (value < node->_val) {
+			return erase(node->_left, value);
+		}
+		else if (value > node->_val) {
+			return erase(node->_right, value);
+		}
+		else {
+			if (!node->_left) {
+				Node<T>* temp = node->_right;
+				delete node;
+				node = temp;
+			}
+			else if (!node->_right) {
+				Node<T>* temp = node->_left;
+				delete node;
+				node = temp;
+			}
+			else {
+				Node<T>* temp = node->_right;
+				while (temp->_left) {
+					temp = temp->_left;
+				}
+				node->_val = temp->_val;
+				erase(node->_right, temp->_val);
+			}
+			return true;
+		};
+	}
 public:
 	Tree() : root(nullptr) {}
 	Tree(const Tree<T>& other) {
@@ -62,5 +95,8 @@ public:
 	void print() {
 		print(root);
 		std::cout << std::endl;
+	}
+	bool eraser(T value) {
+		return erase(root, value);
 	}
 };
