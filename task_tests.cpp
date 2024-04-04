@@ -68,3 +68,28 @@ TEST(contain2, test) {
     }
     else cout << "False" << endl;
 }
+
+TEST(root, test) {
+    Node<int>* node1 = new Node<int>(1);
+    Tree<int> a(node1);
+    a.inserter(2);
+    a.inserter(4);
+    cout << a.getroot()->_val;
+    a.eraser(1);
+    cout << a.getroot()->_val;
+    a.eraser(2);
+    cout << a.getroot()->_val;
+}
+
+TEST(Task, test) {
+    vector<int> a{ 1, 1, 2, 2, 3, 3, 4, 5, 6, 6 };
+    vector<int> result = unique(a);
+    for (int i = 0; i < a.size(); i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i] << " ";
+    }
+    cout << endl;
+}
