@@ -89,7 +89,14 @@ public:
 	~Tree() {
 		clear(root);
 	}
-	bool insert(T value) {
+	Tree<T>& operator=(const Tree<T>& other) {
+		if (this != &other) {
+			clear(root);
+			root = copy(other.root);
+		}
+		return *this;
+	}
+	bool inserter(T value) {
 		return insert(root, value);
 	}
 	void print() {
@@ -99,4 +106,34 @@ public:
 	bool eraser(T value) {
 		return erase(root, value);
 	}
+	Node<T>* getroot() {
+		return root;
+	}
+
 };
+
+template <typename T>
+size_t get_elements(Node<T>* root) {
+	if (!root) return 0;
+	return get_elements(root->_left) + get_elements(root->_right) + 1;
+}
+
+/*template <typename T>
+vector<T> unique(const vector<T>& vec) {
+	Tree<T> before(vec);
+	vector<T> after = {};
+	size_t sas = get_elements(before.getroot());
+	for (int j = 0; j < sas; j++) {
+		int counter = 0;
+		for (int i = 0; i < vec.size(); i++) {
+			if (before.getroot()->_val == vec[i]) {
+				counter++;
+			}
+		}
+		if (counter == 1) {
+			after.push_back(before.getroot()->_val);
+		}
+		before.eraser(before.getroot()->_val);
+	}
+	return after;
+}*/
