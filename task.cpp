@@ -101,6 +101,12 @@ public:
 	Tree(const Tree<T>& other) {
 		root = copy(other.root);
 	}
+	Tree(const vector<T>& other) {
+		root = nullptr;
+		for (auto vec : other) {
+			inserter(vec);
+		}
+	}
 	~Tree() {
 		clear(root);
 	}
@@ -136,12 +142,13 @@ size_t get_elements(Node<T>* root) {
 	return get_elements(root->_left) + get_elements(root->_right) + 1;
 }
 
-/*template <typename T>
+template <typename T>
 vector<T> unique(const vector<T>& vec) {
 	Tree<T> before(vec);
 	vector<T> after = {};
-	size_t sas = get_elements(before.getroot());
-	for (int j = 0; j < sas; j++) {
+	size_t count = get_elements(before.getroot());
+	cout << count << endl;
+	for (int j = 0; j < count; j++) {
 		int counter = 0;
 		for (int i = 0; i < vec.size(); i++) {
 			if (before.getroot()->_val == vec[i]) {
@@ -154,4 +161,4 @@ vector<T> unique(const vector<T>& vec) {
 		before.eraser(before.getroot()->_val);
 	}
 	return after;
-}*/
+}
