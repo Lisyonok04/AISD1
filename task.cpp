@@ -81,6 +81,18 @@ private:
 			return true;
 		};
 	}
+	bool contain(Node<T>* node, T value) {
+		if (!node) {
+			return false;
+		}
+		if (value < node->_val) {
+			return contain(node->_left, value);
+		}
+		else if (value > node->_val) {
+			return contain(node->_right, value);
+		}
+		return true;
+	}
 public:
 	Tree() : root(nullptr) {}
 	Tree(const Tree<T>& other) {
@@ -105,6 +117,9 @@ public:
 	}
 	bool eraser(T value) {
 		return erase(root, value);
+	}
+	bool contains(T value) {
+		return contain(root, value);
 	}
 	Node<T>* getroot() {
 		return root;
