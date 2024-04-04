@@ -95,6 +95,9 @@ private:
 	}
 public:
 	Tree() : root(nullptr) {}
+	Tree(Node<T>* node) {
+		root = new Node<T>(node->_val, node->_left, node->_right);
+	}
 	Tree(const Tree<T>& other) {
 		root = copy(other.root);
 	}
