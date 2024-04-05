@@ -46,6 +46,9 @@ private:
 		else if (node->_val < key) {
 			return insert(node->_right, key);
 		}
+		/*else if (node->_val == key) {
+			return insert(node->_right, 0);
+		}*/
 		return false;
 	}
 
@@ -145,9 +148,10 @@ size_t get_elements(Node<T>* root) {
 template <typename T>
 vector<T> unique(const vector<T>& vec) {
 	Tree<T> before(vec);
+	//before.print();
 	vector<T> after = {};
 	size_t count = get_elements(before.getroot());
-	cout << count << endl;
+	//cout << before.getroot()->_val << endl;
 	for (int j = 0; j < count; j++) {
 		int counter = 0;
 		for (int i = 0; i < vec.size(); i++) {
