@@ -11,6 +11,7 @@ TEST(insert, test) {
     set.inserter(90);
     set.inserter(20);
     set.print();
+    cout << endl;
 }
 
 TEST(clear, test) {
@@ -21,6 +22,7 @@ TEST(clear, test) {
     set.print();
     set.eraser(41);
     set.print();
+    cout << endl;
 }
 
 TEST(get_element, test) {
@@ -29,6 +31,7 @@ TEST(get_element, test) {
     Node<int>* node2 = new Node<int>(4);
     Node<int>* res = new Node<int>(2, node1, node2);
     cout<<get_elements(res);
+    cout << endl;
 }
 
 TEST(get_element2, test) {
@@ -39,6 +42,7 @@ TEST(get_element2, test) {
     Node<int>* node2 = new Node<int>(4, node3, node4);
     Node<int>* res = new Node<int>(2, node1, node2);
     cout << get_elements(res);
+    cout << endl;
 }
 
 TEST(contain, test) {
@@ -53,6 +57,7 @@ TEST(contain, test) {
         cout << "True" << endl;
     }
     else cout << "False" << endl;
+    cout << endl;
 }
 
 TEST(contain2, test) {
@@ -67,6 +72,7 @@ TEST(contain2, test) {
         cout << "True" << endl;
     }
     else cout << "False" << endl;
+    cout << endl;
 }
 
 TEST(root, test) {
@@ -79,10 +85,24 @@ TEST(root, test) {
     cout << a.getroot()->_val;
     a.eraser(2);
     cout << a.getroot()->_val;
+    cout << endl;
 }
 
 TEST(Task, test) {
     vector<int> a{ 1, 1, 2, 2, 3, 3, 4, 5, 6, 6 };
+    vector<int> result = unique(a);
+    for (int i = 0; i < a.size(); i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i] << " ";
+    }
+    cout << endl;
+}
+
+TEST(Task2, test) {
+    vector<int> a{ 1, 1, 1, 2, 2, 1, 1, 3, 3, 4, 4, 5, 5, 6};
     vector<int> result = unique(a);
     for (int i = 0; i < a.size(); i++) {
         cout << a[i] << " ";
