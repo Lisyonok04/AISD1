@@ -1,9 +1,29 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <ctime>
+#include <cstdlib>
+#include <random>
+#include <chrono>
 
 using namespace std;
 
+
+class Randomize {
+private:
+	int _seed;
+	int _min;
+	int _max;
+public:
+	Randomize() : _seed(0), _min(0), _max(1) {};
+	Randomize(int seed, int min, int max) : _seed(seed), _min(min), _max(max) {};
+	int generate_random_number() {
+		mt19937 mt(_seed);
+		uniform_int_distribution<int> distribution(_min, _max);
+		_seed++;
+		return distribution(mt);
+	}
+};
 template<typename T>
 struct Node {
 	int _val;
@@ -165,4 +185,15 @@ vector<T> unique(const vector<T>& vec) {
 		before.eraser(before.getroot()->_val);
 	}
 	return after;
+}
+
+double get_time_(size_t count) {
+	auto start = std::chrono::high_resolution_clock::now();
+	for (int i = 0; i <= 100; i++) {
+		SearchTree<int> test_set;
+		test_set.completion(count);
+	}
+	auto end = std::chrono::high_resolution_clock::now();
+	double rezult = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / 100;
+	return rezult / count;
 }
