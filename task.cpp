@@ -1,188 +1,73 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include <ctime>
-#include <cstdlib>
 #include <random>
-#include <chrono>
 
 using namespace std;
 
 
-class Randomize {
+template<typename K, typename T>
+class HashTable {
 private:
-	int _seed;
-	int _min;
-	int _max;
+	const size_t _min_size = 10;
+	vector <Node<K, T>> _data;
+	size_t _count;
+	enum state = { empty, filled, deleted };
+	struct Node {
+		K* key;
+		T* value;
+		state status;
+		Node() : key(nullptr), value(nullptr), status(empty) {};
+		void print() {
+			cout << key << ":" << value << endl;
+		}
+		void del() {
+			key = nullptr;
+			value = nullptr;
+			status = deleted;
+		}
+	};
+	size_t h(K key) {
+
+	};
 public:
-	Randomize() : _seed(0), _min(0), _max(1) {};
-	Randomize(int seed, int min, int max) : _seed(seed), _min(min), _max(max) {};
-	int generate_random_number() {
-		mt19937 mt(_seed);
-		uniform_int_distribution<int> distribution(_min, _max);
-		_seed++;
-		return distribution(mt);
+
+	HashTable() { 
+		_data.resize(_min_size);
+		_count = 0;
 	}
-};
-template<typename T>
-struct Node {
-	int _val;
-	Node<T>* _left;
-	Node<T>* _right;
 
-	Node(int val) :_val(val), _left(nullptr), _right(nullptr) {};
-	Node(int val, Node<T>* left, Node<T>* right) :_val(val), _left(left), _right(right) {};
-};
+	HashTable(size_t size) {
+		_data.resize(size);
+		_count = 0;
+	}
 
-template<typename T>
-class Tree {
-private:
-	Node<T>* root;
+	HashTable(HashTable <K, T>& other) {
+		_data = other._data;
+		_count = other._count;
+	}
+	~HashTable() = default;
 
-	void clear(Node<T>* node) {
-		if (node) {
-			clear(node->_left);
-			clear(node->_right);
-			delete node;
+	HashTable<K, T>& operator=(HashTable<K, T>& other) {
+		if (this == &other) {
+			return *this;
 		}
+		_data = other._data;
+		_count = other._count;
 	}
 
-	void print(Node<T>* node) {
-		if (node) {
-			print(node->_left);
-			std::cout << node->_val << " ";
-			print(node->_right);
+	void print() {
+		for (auto& i : _data) {
+			i.print();
 		}
 	}
 
-	bool insert(Node<T>*& node, T key) {
-		if (!node) {
-			node = new Node<T>(key);
-			return true;
+	bool contains(T value) {
+		for (auto& i : _data) {
+			if (i.value == value) {
+				return true;
+			}
 		}
-		if (node->_val > key) {
-			return insert(node->_left, key);
-		}
-		else if (node->_val < key) {
-			return insert(node->_right, key);
-		}
-		/*else if (node->_val == key) {
-			return insert(node->_right, 0);
-		}*/
 		return false;
 	}
-
-	bool erase(Node<T>*& node, T value) {
-		if (!node) {
-			return false;
-		}
-		if (value < node->_val) {
-			return erase(node->_left, value);
-		}
-		else if (value > node->_val) {
-			return erase(node->_right, value);
-		}
-		else {
-			if (!node->_left) {
-				Node<T>* temp = node->_right;
-				delete node;
-				node = temp;
-			}
-			else if (!node->_right) {
-				Node<T>* temp = node->_left;
-				delete node;
-				node = temp;
-			}
-			else {
-				Node<T>* temp = node->_right;
-				while (temp->_left) {
-					temp = temp->_left;
-				}
-				node->_val = temp->_val;
-				erase(node->_right, temp->_val);
-			}
-			return true;
-		};
-	}
-	bool contain(Node<T>* node, T value) {
-		if (!node) {
-			return false;
-		}
-		if (value < node->_val) {
-			return contain(node->_left, value);
-		}
-		else if (value > node->_val) {
-			return contain(node->_right, value);
-		}
-		return true;
-	}
-public:
-	Tree() : root(nullptr) {}
-	Tree(Node<T>* node) {
-		root = new Node<T>(node->_val, node->_left, node->_right);
-	}
-	Tree(const Tree<T>& other) {
-		root = copy(other.root);
-	}
-	Tree(const vector<T>& other) {
-		root = nullptr;
-		for (auto vec : other) {
-			inserter(vec);
-		}
-	}
-	~Tree() {
-		clear(root);
-	}
-	Tree<T>& operator=(const Tree<T>& other) {
-		if (this != &other) {
-			clear(root);
-			root = copy(other.root);
-		}
-		return *this;
-	}
-	bool inserter(T value) {
-		return insert(root, value);
-	}
-	void print() {
-		print(root);
-		std::cout << std::endl;
-	}
-	bool eraser(T value) {
-		return erase(root, value);
-	}
-	bool contains(T value) {
-		return contain(root, value);
-	}
-	Node<T>* getroot() {
-		return root;
-	}
-
 };
-
-template <typename T>
-size_t get_elements(Node<T>* root) {
-	if (!root) return 0;
-	return get_elements(root->_left) + get_elements(root->_right) + 1;
-}
-
-template <typename T>
-vector<T> unique(const vector<T>& vec) {
-	Tree<T> before(vec);
-	//before.print();
-	vector<T> after = {};
-	size_t count = get_elements(before.getroot());
-	//cout << before.getroot()->_val << endl;
-	for (int j = 0; j < count; j++) {
-		int counter = 0;
-		for (int i = 0; i < vec.size(); i++) {
-			if (before.getroot()->_val == vec[i]) {
-				counter++;
-			}
-		}
-		if (counter == 1) {
-			after.push_back(before.getroot()->_val);
-		}
-		before.eraser(before.getroot()->_val);
-	}
-	return after;
-}
