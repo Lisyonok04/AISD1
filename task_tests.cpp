@@ -113,3 +113,48 @@ TEST(Task2, test) {
     }
     cout << endl;
 }
+
+//TEST(test_for_time, test) {
+//    Tree<int> t1;
+//    Tree<int> t2;
+//    Tree<int> t3;
+//    t1.filling(1000);
+//    t2.filling(10000);
+//    t3.filling(100000);
+//    vector<int> v1(1000);
+//    vector<int> v2(10000);
+//    vector<int> v3(100000);
+//    cout << "time for filling vector>>\n\t1000 = "
+//        << get_time_filling_vector(1000) / 1000 << " ms\n\t10000 = "
+//        << get_time_filling_vector(10000) / 1000 << " ms\n\t100000 = "
+//        << get_time_filling_vector(100000) / 1000 << " ms" << endl;
+//    cout << "time for contains vector>>\n\t1000 = "
+//        << get_time_contains_vector(v1, 1000) / 1000 << " ms\n\t10000 = "
+//        << get_time_contains_vector(v2, 10000) / 1000 << " ms\n\t100000 = "
+//        << get_time_contains_vector(v3, 100000) / 1000 << " ms" << endl;
+//    cout << "time for insert vector>>\n\t1000 = "
+//        << get_time_insert_vector(v1, 1000) / 1000 << " ms\n\t10000 = "
+//        << get_time_insert_vector(v2, 10000) / 1000 << " ms\n\t100000 = "
+//        << get_time_insert_vector(v3, 100000) / 1000 << " ms" << endl;
+//    cout << "time for erase vector>>\n\t1000 = "
+//        << get_time_erase_vector(v1, 1000) / 1000 << " ms\n\t10000 = "
+//        << get_time_erase_vector(v2, 10000) / 1000 << " ms\n\t100000 = "
+//        << get_time_erase_vector(v3, 100000) / 1000 << " ms" << endl;
+//
+//    cout << "time for filling >>\n\t1000 = "
+//        << get_time_filling(1000) / 1000 << " ms\n\t10000 = "
+//        << get_time_filling(10000) / 1000 << " ms\n\t100000 = "
+//        << get_time_filling(100000) / 1000 << " ms" << endl;
+//    cout << "time for contains >>\n\t1000 = "
+//        << get_time_contains(t1, 1000) / 1000 << " ms\n\t10000 = "
+//        << get_time_contains(t2, 10000) / 1000 << " ms\n\t100000 = "
+//        << get_time_contains(t3, 100000) / 1000 << " ms" << endl;
+//    cout << "time for insert >>\n\t1000 = "
+//        << get_time_insert(t1, 1000) / 1000 << " ms\n\t10000 = "
+//        << get_time_insert(t2, 10000) / 1000 << " ms\n\t100000 = "
+//        << get_time_insert(t3, 100000) / 1000 << " ms" << endl;
+//    cout << "time for erase >>\n\t1000 = "
+//        << get_time_erase(t1, 1000) / 1000 << " ms\n\t10000 = "
+//        << get_time_erase(t2, 10000) / 1000 << " ms\n\t100000 = "
+//        << get_time_erase(t3, 100000) / 1000 << " ms" << endl;
+//}
