@@ -30,7 +30,7 @@ TEST(get_element, test) {
     Node<int>* node1 = new Node<int>(1);
     Node<int>* node2 = new Node<int>(4);
     Node<int>* res = new Node<int>(2, node1, node2);
-    cout<<get_elements(res);
+    cout<<get_count_elements(res);
     cout << endl;
 }
 
@@ -41,7 +41,7 @@ TEST(get_element2, test) {
     Node<int>* node4 = new Node<int>(10);
     Node<int>* node2 = new Node<int>(4, node3, node4);
     Node<int>* res = new Node<int>(2, node1, node2);
-    cout << get_elements(res);
+    cout << get_count_elements(res);
     cout << endl;
 }
 
@@ -103,6 +103,32 @@ TEST(Task, test) {
 
 TEST(Task2, test) {
     vector<int> a{ 1, 1, 1, 2, 2, 1, 1, 3, 3, 4, 4, 5, 5, 6};
+    vector<int> result = unique(a);
+    for (int i = 0; i < a.size(); i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i] << " ";
+    }
+    cout << endl;
+}
+
+TEST(Task3, test) {
+    vector<int> a{ 1, 2, 3, 4, 5, 6 };
+    vector<int> result = unique(a);
+    for (int i = 0; i < a.size(); i++) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i] << " ";
+    }
+    cout << endl;
+}
+
+TEST(Task4, test) {
+    vector<int> a{ 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 5, 6, 6 };
     vector<int> result = unique(a);
     for (int i = 0; i < a.size(); i++) {
         cout << a[i] << " ";
