@@ -77,9 +77,6 @@ private:
 		else if (node->_val < key) {
 			return insert(node->_right, key);
 		}
-		/*else if (node->_val == key) {
-			return insert(node->_right, 0);
-		}*/
 		return false;
 	}
 
@@ -182,18 +179,16 @@ public:
 };
 
 template <typename T>
-size_t get_elements(Node<T>* root) {
+size_t get_count_elements(Node<T>* root) {
 	if (!root) return 0;
-	return get_elements(root->_left) + get_elements(root->_right) + 1;
+	return get_count_elements(root->_left) + get_count_elements(root->_right) + 1;
 }
 
 template <typename T>
 vector<T> unique(const vector<T>& vec) {
 	Tree<T> before(vec);
-	//before.print();
 	vector<T> after = {};
-	size_t count = get_elements(before.getroot());
-	//cout << before.getroot()->_val << endl;
+	size_t count = get_count_elements(before.getroot());
 	for (int j = 0; j < count; j++) {
 		int counter = 0;
 		for (int i = 0; i < vec.size(); i++) {
